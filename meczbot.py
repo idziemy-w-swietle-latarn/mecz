@@ -1,9 +1,10 @@
 import praw
+import os
 
-reddit = praw.Reddit(client_id = '{{secrets.CLIENT_ID}}',
-                     client_secret = '{{secrets.CLIENT_SECRET}}',
+reddit = praw.Reddit(client_id = os.environ['CLIENT_ID'],
+                     client_secret = os.environ['CLIENT_SECRET'],
                      username = 'meczbot',
-                     password = '{{secrets.PASSWORD}}',
+                     password = os.environ['PASSWORD'],
                      user_agent = '/r/meczbot /u/meczbot')
 
 
