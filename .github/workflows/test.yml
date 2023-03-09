@@ -1,0 +1,19 @@
+name: test application
+
+on:
+  schedule:
+    - cron: '55 22 * * *'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+
+    - name: test
+      run: |
+        echo babacar
