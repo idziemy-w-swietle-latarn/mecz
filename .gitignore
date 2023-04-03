@@ -1,0 +1,12 @@
+*.html
+addon.txt
+*.log
+*Transfermarkt_files
+.vscode
+__pycache__
+key.txt
+key.txt.pub
+to_do.txt
+brudnopis.py
+test.txt
+usage_ideas.py
