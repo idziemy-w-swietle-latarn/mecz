@@ -1,6 +1,4 @@
-import requests
 from bs4 import BeautifulSoup
-from transfermarkt import main_leagues, second_leagues, main_cups, second_cups
 from datetime import date, datetime
 import logging
 import re
