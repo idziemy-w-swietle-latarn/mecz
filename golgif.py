@@ -4,10 +4,10 @@ from bs4 import BeautifulSoup
 from time import sleep
 from sub_dict import leagues
 import json
+import logging
 
-
+logging.basicConfig(filename='golgif.log', encoding='utf-8', level=logging.INFO)
 subreddit = reddit.subreddit('soccer')
-
 result = subreddit.stream.submissions(skip_existing=True)
 
 test_thread = '120tuzv'
@@ -57,6 +57,7 @@ for submission in result:
     if submission.link_flair_text == 'Media':
         if '-' in submission.title:
             competitors = get_competitiors(submission.title)
+            logging.info(submission.title)
             try:
                 competitions_links = check_competition_online(competitors[0])
             except AttributeError as e:
@@ -72,4 +73,5 @@ for submission in result:
                         if thread_id:
                             thread = reddit.submission(thread_id)
                             thread.reply(template.format(submission.title, submission.url))
+                            logging.info('Submitted: {}'.format(submission.title))
                             break

@@ -35,6 +35,6 @@ def test_single_match():
     assert match.host_link == 'https://www.transfermarkt.pl/gremio-porto-alegre-u20/spielplan/verein/12690/saison_id/2022'
     assert match.guest == 'Athletico U20'
     assert match.guest_link == 'https://www.transfermarkt.pl/club-athletico-paranaense-u20/spielplan/verein/15038/saison_id/2022'
-    assert match.result == '2:1'
+    assert match.time == '2:1'
     assert match.match_link == 'https://www.transfermarkt.pl/spielbericht/index/spielbericht/4034041'
     assert match.status == 'matchresult finished'

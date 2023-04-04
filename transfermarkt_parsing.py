@@ -34,7 +34,7 @@ def game_dict_parser(game_dict):
     temp_dict.pop('host_link', None)
     temp_dict.guest = "[{}]({})".format(temp_dict.guest, temp_dict.guest_link)
     temp_dict.pop('guest_link', None)
-    temp_dict.result = "[{}]({})".format(temp_dict.result, temp_dict.match_link)
+    temp_dict.time = "[{}]({})".format(temp_dict.time, temp_dict.match_link)
     temp_dict.pop('match_link', None)
     temp_dict.pop('status', None)
     return temp_dict
@@ -43,8 +43,8 @@ def is_theDay(checked_date_string:date, theDay:date):
     return datetime.strptime(checked_date_string, '%d.%m.%Y').date() == theDay
     
 def is_today(checked_date_string:date):
-    result = is_theDay(checked_date_string, date.today())
-    return result
+    time = is_theDay(checked_date_string, date.today())
+    return time
 
 def is_past(date_string):
     return datetime.strptime(date_string, '%d.%m.%Y').date() < date.today()
@@ -150,13 +150,13 @@ class Fixtures():
     @staticmethod
     def matches_by_competitions(aktuell_soup: BeautifulSoup):
         competitions = aktuell_soup.find_all('tr', {'class': 'wettbewerbsZeile'})
-        results = {}
+        times = {}
         for league in competitions:
             title = league.td.div.div.div.a.text
             link = league.td.div.div.div.a['href']
             games = league.parent.find_all('tr', {'class': 'begegnungZeile'}, recursive=False)
-            results[link] = (title, games)
-        return results
+            times[link] = (title, games)
+        return times
             
     @staticmethod
     def single_match(match_html):
@@ -190,10 +190,10 @@ class Fixtures():
             match_dict.guest_link = ''
         try:
             entry = match[3]
-            match_dict.result = entry.span.a.span.text
+            match_dict.time = entry.span.a.span.text
         except (AttributeError, TypeError) as e:
             logging.error(f'{e}: {entry}')
-            match_dict.result = ''
+            match_dict.time = ''
         try:
             entry = match[3]
             match_dict.match_link = match[3].span.a['href']
