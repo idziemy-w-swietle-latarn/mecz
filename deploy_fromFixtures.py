@@ -33,10 +33,21 @@ for key, value in fixtures.items():
     if key:
         day_dict[key].extend(submatches)
         
-threads = {}        
-for key, value in day_dict.items():
-    thread = subreddit.submit(title_text(key), selftext = body_text(value), discussion_type='CHAT')
-    threads[key] = thread.id
+threads = {}   
+
+order_queue = ['Europa Wschodnia', 'Europa Zachodnia', 'Europa Południowa', 'Wielka Brytania', 
+               'Rozgrywki Polskiego Związku Piłki Nożnej', 'Ekstraklasa']
+
+for league_submition in order_queue:
+    value = day_dict.get(league_submition)
+    key = league_submition
+    if value:
+        thread = subreddit.submit(title_text(key), selftext = body_text(value), discussion_type='CHAT')
+        threads[key] = thread.id
+
+# for key, value in day_dict.items():
+#     thread = subreddit.submit(title_text(key), selftext = body_text(value), discussion_type='CHAT')
+#     threads[key] = thread.id
     
 with open('data.json', 'w', encoding='utf-8') as f:
     json.dump(threads, f, ensure_ascii=False, indent=4)

@@ -71,7 +71,9 @@ leagues_raw = {'/premier-league/gesamtspielplan/wettbewerb/GB1/saison_id/2022': 
            '/coupe-de-france/gesamtspielplan/pokalwettbewerb/FRC/saison_id/2022': 'Europa Zachodnia',
            '/dfb-pokal/gesamtspielplan/pokalwettbewerb/DFB/saison_id/2022': 'Europa Zachodnia',
            '/coppa-italia/gesamtspielplan/pokalwettbewerb/CIT/saison_id/2022': 'Europa Południowa',
-           '/copa-del-rey/gesamtspielplan/pokalwettbewerb/CDR/saison_id/2022': 'Europa Południowa'
+           '/copa-del-rey/gesamtspielplan/pokalwettbewerb/CDR/saison_id/2022': 'Europa Południowa',
+           '/super-league-1-play-off/gesamtspielplan/wettbewerb/POGR/saison_id/2022': 'Europa Południowa',
+           '/super-league-1-play-out/gesamtspielplan/wettbewerb/S1PO/saison_id/2022': 'Europa Południowa',
            }
 
 
