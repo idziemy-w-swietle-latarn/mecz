@@ -6,17 +6,6 @@ from sub_dict import leagues
 import json
 import logging
 
-logging.basicConfig(filename='golgif.log', encoding='utf-8', level=logging.INFO)
-subreddit = reddit.subreddit('soccer')
-result = subreddit.stream.submissions(skip_existing=True)
-
-test_thread = '120tuzv'
-test_thread = reddit.submission('120tuzv')
-
-template = "[{}]({})"
-headers = {
-'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36',
-}
 
 def get_competitiors(input_string):
     splitted = input_string.split('-')
@@ -49,29 +38,44 @@ def check_competition_online(input_string):
         return [competition.h2.a['href'] for competition in div]
     return None
 
-with open('data.json', encoding='utf-8') as f:
-    threads = json.load(f)
+
+while True:
+    try:
+        logging.basicConfig(filename='golgif.log', encoding='utf-8', level=logging.INFO)
+        subreddit = reddit.subreddit('soccer')
+        result = subreddit.stream.submissions(skip_existing=True)
 
 
-for submission in result:
-    if submission.link_flair_text == 'Media':
-        if '-' in submission.title:
-            competitors = get_competitiors(submission.title)
-            logging.info(submission.title)
-            try:
-                competitions_links = check_competition_online(competitors[0])
-            except AttributeError as e:
-                try:
-                    competitions_links = check_competition_online(competitors[1])
-                except AttributeError:
-                    competitions_links = None
-            if competitions_links:
-                for link in competitions_links:
-                    thread_title = leagues.get(link.split('/')[4])
-                    if thread_title:
-                        thread_id = threads.get(thread_title)
-                        if thread_id:
-                            thread = reddit.submission(thread_id)
-                            thread.reply(template.format(submission.title, submission.url))
-                            logging.info('Submitted: {}'.format(submission.title))
-                            break
+        template = "[{}]({})"
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.106 Safari/537.36',
+        }
+
+        with open('data.json', encoding='utf-8') as f:
+            threads = json.load(f)
+
+        for submission in result:
+            if submission.link_flair_text == 'Media':
+                if '-' in submission.title:
+                    competitors = get_competitiors(submission.title)
+                    logging.info(submission.title)
+                    try:
+                        competitions_links = check_competition_online(competitors[0])
+                    except AttributeError as e:
+                        try:
+                            competitions_links = check_competition_online(competitors[1])
+                        except AttributeError:
+                            competitions_links = None
+                    if competitions_links:
+                        for link in competitions_links:
+                            thread_title = leagues.get(link.split('/')[4])
+                            if thread_title:
+                                thread_id = threads.get(thread_title)
+                                if thread_id:
+                                    thread = reddit.submission(thread_id)
+                                    thread.reply(template.format(submission.title, submission.url))
+                                    logging.info('Submitted: {}'.format(submission.title))
+                                    break
+    except Exception as e:
+        logging.exception(e)
+        continue
