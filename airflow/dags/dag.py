@@ -2,7 +2,7 @@ from airflow import DAG
 from airflow.operators.python import PythonOperator 
 import sys
 # directory reach
-directory = sys.path.path(__file__).abspath() 
+directory = sys.path(__file__).abspath() 
 # setting path
 sys.path.append(directory.parent.parent) 
 # importing
@@ -20,3 +20,5 @@ deploy_fromFixtures = PythonOperator(python_callable=main,
 
 #
 deploy_fromFixtures
+
+
