@@ -1,8 +1,9 @@
 from airflow import DAG
 from airflow.operators.python import PythonOperator 
 import sys
+import os
 # directory reach
-directory = sys.path(__file__).abspath() 
+directory = os.path.abspath('__file__')
 # setting path
 sys.path.append(directory.parent.parent) 
 # importing
