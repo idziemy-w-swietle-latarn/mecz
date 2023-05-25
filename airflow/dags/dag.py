@@ -8,10 +8,12 @@ directory = os.path.dirname(directory)
 directory = os.path.dirname(directory)
 # setting path
 sys.path.append(directory) 
-sys.path.append('...')
 # importing
+print(sys.path)
+
 from deploy_fromFixtures import main
 from datetime import datetime
+
 
 dag = DAG(dag_id='deploy_fromFixtures',
           schedule_interval="0 4 * * *",
