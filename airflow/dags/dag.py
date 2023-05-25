@@ -6,6 +6,7 @@ import os
 directory = os.path.abspath('__file__')
 directory = os.path.dirname(directory)
 directory = os.path.dirname(directory)
+directory = os.path.dirname(directory)
 # setting path
 sys.path.append(directory) 
 # importing
