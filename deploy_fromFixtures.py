@@ -27,8 +27,9 @@ def main():
     for key, value in fixtures.items():
         submatches = []
         title = value[0]
-        submatches.append(15*'*' + '   ' + title + '  ' + 15*'*')
+        link = "https://www.transfermarkt.com" + key
         key = key.split('/')[4]
+        submatches.append(15*'*' + '   ' + title + '  ' + 15*'*' + " [{}]({}) ".format(key, link) + 15*'*')
         key = leagues.get(key)
         
         for game in value[1]:
