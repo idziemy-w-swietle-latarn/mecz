@@ -8,7 +8,7 @@ directory = os.path.dirname(directory)
 directory = os.path.dirname(directory)
 # setting path
 sys.path.append(directory) 
-#sys.path.append('...')
+sys.path.append('...')
 # importing
 from deploy_fromFixtures import main
 from datetime import datetime
