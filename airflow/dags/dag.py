@@ -17,7 +17,7 @@ from datetime import datetime
 
 
 dag = DAG(dag_id='deploy_fromFixtures',
-          schedule_interval="0 4 * * *",
+          schedule="0 4 * * *",
           start_date=datetime(2023, 5, 18, 15, 50)
           )
 
